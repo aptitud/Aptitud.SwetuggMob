@@ -9,9 +9,7 @@ namespace Aptitud.SwetuggMob.Web
     public class HomeModule : NancyModule
     {
         public HomeModule() {
-
             Get["/"] = parameters => "Hello Swetugg";
-        
         }
     }
 }
