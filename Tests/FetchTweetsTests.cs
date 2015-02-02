@@ -7,7 +7,6 @@ namespace Tests
     public class FetchTweetsTests
     {
         [Test]
-        [Ignore]
         public void FetchTweetsTest()
         {
             var finder = new TweetFinder();
