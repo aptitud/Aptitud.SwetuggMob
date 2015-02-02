@@ -48,6 +48,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aptitud.SwetuggMob.Web\Aptitud.SwetuggMob.Web.csproj">
+      <Project>{d7ebd3b6-5ec2-45cc-a845-98983e2721d1}</Project>
+      <Name>Aptitud.SwetuggMob.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

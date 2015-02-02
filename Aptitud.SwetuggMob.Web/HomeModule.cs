@@ -25,7 +25,6 @@ namespace Aptitud.SwetuggMob.Web
                 }
             };
 
-
             Get["/"] = parameters => View["Home", model];
         }
     }

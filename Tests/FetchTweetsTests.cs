@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Aptitud.SwetuggMob.Web.Services;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Tests
     [TestFixture]
     public class FetchTweetsTests
     {
+        var tweetFinder = new TweetFinder();
     }
 }
