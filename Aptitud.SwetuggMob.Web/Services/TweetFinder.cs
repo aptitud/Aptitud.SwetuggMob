@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using Tweetinvi;
+using Tweetinvi.Core.Interfaces;
 
 namespace Aptitud.SwetuggMob.Web.Services
 {
@@ -15,7 +16,7 @@ namespace Aptitud.SwetuggMob.Web.Services
         }
 
 
-        public IEnumerable<object> GetTweetsForHashTag(string hashtag)
+        public IEnumerable<ITweet> GetTweetsForHashTag(string hashtag)
         {
             return Search.SearchTweets(hashtag);
         }
