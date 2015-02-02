@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Tweetinvi;
 
 namespace Aptitud.SwetuggMob.Web.Services
@@ -25,7 +26,12 @@ namespace Aptitud.SwetuggMob.Web.Services
     {
         public TwitterStartup()
         {
-            TwitterCredentials.SetCredentials("619483140-7W7gRCf9S7a9fxJzPgpZUPPxKewvfPWjDIwoRjGZ", "Zzg8BB6C87SjHJEbKPPQaXFlG3fjfQqHgp59XjbPIzRco", "Av4MT6llbEPWJbsrcdJmYLlSA", "B5PpDxGpm8KSeU6W0mBX5EHKOcVsldzdo1MN0ELJbnlCqi1h5O");
+            TwitterCredentials.SetCredentials(
+                ConfigurationManager.AppSettings["tw.accessToken"],
+                ConfigurationManager.AppSettings["tw.accessSecret"],
+                ConfigurationManager.AppSettings["tw.consumerKey"],
+                ConfigurationManager.AppSettings["tw.consumerSecret"]
+                );
         }
     }
 }

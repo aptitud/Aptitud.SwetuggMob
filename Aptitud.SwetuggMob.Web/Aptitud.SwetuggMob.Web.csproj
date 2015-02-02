@@ -107,7 +107,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\bootstrap-flat-extras.css" />
+    <Content Include="Content\bootstrap\bootstrap-flat-extras.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-flat.css" />
+    <Content Include="Content\bootstrap\bootstrap-flat.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +134,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Home.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -126,7 +145,9 @@
     <Compile Include="Services\TweetFinder.cs" />
     <Compile Include="Services\TwitterService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\HomeViewModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
