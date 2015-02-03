@@ -5,7 +5,7 @@ using Aptitud.SwetuggMob.Web.Services;
 using NUnit.Framework;
 using Tweetinvi.Core.Interfaces;
 
-namespace Tests
+namespace Tests.Integration
 {
     [TestFixture]
     public class FetchTweetsTests

@@ -12,11 +12,17 @@ namespace Aptitud.SwetuggMob.Web.Views
         {
             public string Message { get; set; }
 
+            public string Author { get; set; }
+
+            public string AuthorLocation { get; set; }
+
             public static TweetItem Create(ITweet tweet)
             {
                 return new TweetItem
                 {
                     Message = tweet.Text,
+                    Author = tweet.Creator.Name,
+                    AuthorLocation = tweet.Creator.Location
                 };
             }
         }

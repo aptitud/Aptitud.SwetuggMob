@@ -19,7 +19,10 @@ namespace Aptitud.SwetuggMob.Web.Services
 
         public IEnumerable<ITweet> GetTweetsForHashTag(string hashtag)
         {
-            return Search.SearchTweets(hashtag);
+            var searchParams = Search.GenerateSearchTweetParameter(hashtag);
+            searchParams.MaximumNumberOfResults = 100;
+
+            return Search.SearchTweets(searchParams);
         }
 
         public IEnumerable<string> GetDistinctLocationsFromTweets(IEnumerable<ITweet> tweets)
