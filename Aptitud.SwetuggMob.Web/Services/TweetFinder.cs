@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Geocoding;
 using Tweetinvi;
 using Tweetinvi.Core.Events;
@@ -22,7 +23,7 @@ namespace Aptitud.SwetuggMob.Web.Services
         public IEnumerable<ITweet> GetTweetsForHashTag(string hashTag)
         {
             var searchParams = Search.GenerateSearchTweetParameter(hashTag);
-            searchParams.MaximumNumberOfResults = 15;
+            searchParams.MaximumNumberOfResults = 100;
 
             return Search.SearchTweets(searchParams);
         }
@@ -40,16 +41,25 @@ namespace Aptitud.SwetuggMob.Web.Services
             };
 
             return locations;
-        } 
+        }
 
-        public Dictionary<string, Geocoding.Location> GetLocationsForHashTag(string hashTag)
+        public List<TweetLocation> GetLocationsForHashTag(string hashTag)
         {
-            var tweets = GetTweetsForHashTag("#Swetugg");
+            var tweets = GetTweetsForHashTag(hashTag);
             var locations = GetDistinctLocationsFromTweets(tweets);
             var geoCodes = locations.Select(GetGeocode).Where(geoCode => geoCode != null).ToList();
 
             var groupedAddresses = geoCodes.GroupBy(x => x.FormattedAddress);
-            return groupedAddresses.ToDictionary(x => x.Key, x => x.First().Coordinates);
+            var tweetLocations = new List<TweetLocation>();
+            groupedAddresses.ForEach(
+                x => tweetLocations.Add(
+                    new TweetLocation
+                    {
+                        Name = x.Key,
+                        Lat = x.FirstOrDefault().Coordinates.Latitude,
+                        Long = x.FirstOrDefault().Coordinates.Longitude
+                    }));
+            return tweetLocations;
         }
 
         public IEnumerable<string> GetDistinctLocationsFromTweets(IEnumerable<ITweet> tweets)
@@ -59,14 +69,14 @@ namespace Aptitud.SwetuggMob.Web.Services
         }
 
         public Geocoding.Google.GoogleAddress GetGeocode(string address)
-		{
-			if (String.IsNullOrEmpty(address))
+        {
+            if (String.IsNullOrEmpty(address))
                 return null;
 
             var geoCoder = new Geocoding.Google.GoogleGeocoder();
 
-			return geoCoder.Geocode(address).FirstOrDefault();
-		}
+            return geoCoder.Geocode(address).FirstOrDefault();
+        }
     }
 
 
