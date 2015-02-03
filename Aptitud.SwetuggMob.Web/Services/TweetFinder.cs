@@ -5,6 +5,7 @@ using System.Linq;
 using Tweetinvi;
 using Tweetinvi.Core.Events;
 using Tweetinvi.Core.Interfaces;
+using Geocoding.Google;
 
 namespace Aptitud.SwetuggMob.Web.Services
 {
@@ -17,12 +18,30 @@ namespace Aptitud.SwetuggMob.Web.Services
             var startup = Startup.Value;
         }
 
-        public IEnumerable<ITweet> GetTweetsForHashTag(string hashtag)
+        public IEnumerable<ITweet> GetTweetsForHashTag(string hashTag)
         {
-            var searchParams = Search.GenerateSearchTweetParameter(hashtag);
+            var searchParams = Search.GenerateSearchTweetParameter(hashTag);
             searchParams.MaximumNumberOfResults = 100;
 
             return Search.SearchTweets(searchParams);
+        }
+
+        public Dictionary<string, Geocoding.Location> GetLocationsForHashTag(string hashTag)
+        {
+            var tweets = GetTweetsForHashTag("#Swetugg");
+            var locations = GetDistinctLocationsFromTweets(tweets);
+            var geoCodes = new List<GoogleAddress>();
+
+            foreach (var location in locations)
+            {
+                var geoCode = GetGeocode(location);
+
+                if (geoCode != null)
+                    geoCodes.Add(geoCode);
+            }
+
+            var groupedAddresses = geoCodes.GroupBy(x => x.FormattedAddress);
+            return groupedAddresses.ToDictionary(x => x.Key, x => x.First().Coordinates);
         }
 
         public IEnumerable<string> GetDistinctLocationsFromTweets(IEnumerable<ITweet> tweets)

@@ -10,7 +10,7 @@ namespace Aptitud.SwetuggMob.Web
         {
             var tweetFinder = new TweetFinder();
 
-            var model = HomeViewModel.Create(tweetFinder.GetTweetsForHashTag("#Swetugg"));
+            var model = HomeViewModel.Create(tweetFinder.GetLocationsForHashTag("#Swetugg"));
 
             Get["/"] = parameters => View["Home", model];
         }

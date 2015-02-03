@@ -6,32 +6,13 @@ namespace Aptitud.SwetuggMob.Web.Views
 {
     public class HomeViewModel
     {
-        public IEnumerable<TweetItem> Tweets { get; set; }
+        public Dictionary<string, Geocoding.Location> TweetLocations { get; set; }
 
-        public class TweetItem
-        {
-            public string Message { get; set; }
-
-            public string Author { get; set; }
-
-            public string AuthorLocation { get; set; }
-
-            public static TweetItem Create(ITweet tweet)
-            {
-                return new TweetItem
-                {
-                    Message = tweet.Text,
-                    Author = tweet.Creator.Name,
-                    AuthorLocation = tweet.Creator.Location
-                };
-            }
-        }
-
-        public static HomeViewModel Create(IEnumerable<ITweet> tweets)
+        public static HomeViewModel Create(Dictionary<string, Geocoding.Location> locations)
         {
             return new HomeViewModel
             {
-                Tweets = tweets.Select(TweetItem.Create),
+                TweetLocations = locations
             };
         }
     }

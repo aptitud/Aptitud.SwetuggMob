@@ -4,17 +4,32 @@
     <title>Hello Swetugg!</title>
     <link rel="stylesheet" href="/Content/bootstrap/bootstrap.css">
 
+    <script src="../Scripts/jquery-1.9.1.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+    
+        var map;
+        var mapOptions;
 
+        var locations = $("#locations li");
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(dto.coordinates.Latitude, dto.coordinates.Longitude),
+            map: map,
+            icon: image,
+            animation: google.maps.Animation.DROP,
+        });
+
+    </script>
 </head>
 <body>
 
-    <table>
-        @Each.Tweets
-            <tr>
-                <td>@Current.Message (@Current.Author, @Current.AuthorLocation)</td>
-            </tr>
+    <ul id="locations">
+        @Each.TweetLocations
+            <li>@Current.Value</li>
         @EndEach
-    </table>
+    </ul>
+
 
 </body>
 </html>
