@@ -26,7 +26,7 @@ namespace Tests.Integration
             return tweets;
         }
 
-        [Test]
+        [Test, Ignore]
         public void GetLocationsFromTweets()
         {
             var finder = new TweetFinder();
