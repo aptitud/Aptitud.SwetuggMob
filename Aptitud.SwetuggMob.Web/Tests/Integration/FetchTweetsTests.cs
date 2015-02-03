@@ -4,6 +4,7 @@ using System.Linq;
 using Aptitud.SwetuggMob.Web.Services;
 using NUnit.Framework;
 using Tweetinvi.Core.Interfaces;
+using Geocoding.Google;
 
 namespace Tests.Integration
 {
@@ -25,12 +26,27 @@ namespace Tests.Integration
             return tweets;
         }
 
-        [Test, Ignore]
+        [Test]
         public void GetLocationsFromTweets()
         {
             var finder = new TweetFinder();
             var tweets = finder.GetTweetsForHashTag("#Swetugg");
             var locations = finder.GetDistinctLocationsFromTweets(tweets);
+            var geoCodes = new List<GoogleAddress>();
+
+            foreach (var location in locations)
+            {
+                var geoCode = finder.GetGeocode(location);
+
+                if (geoCode != null)
+                    geoCodes.Add(geoCode);
+            }
+
+            var distinctGeoCodes = geoCodes.ToLookup(x => x.FormattedAddress, (x) => x.Coordinates);
         }
+
+
+
+
     }
 }

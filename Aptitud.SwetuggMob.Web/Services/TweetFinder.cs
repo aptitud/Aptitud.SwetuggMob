@@ -30,6 +30,16 @@ namespace Aptitud.SwetuggMob.Web.Services
             return tweets.Where(t => !String.IsNullOrEmpty(t.Creator.Location))
                 .Select(tweet => tweet.Creator.Location).ToList().Distinct();
         }
+
+        public Geocoding.Google.GoogleAddress GetGeocode(string address)
+		{
+			if (String.IsNullOrEmpty(address))
+                return null;
+
+            var geoCoder = new Geocoding.Google.GoogleGeocoder();
+
+			return geoCoder.Geocode(address).FirstOrDefault();
+		}
     }
 
 
