@@ -10,7 +10,7 @@ namespace Tests.Integration
     [TestFixture]
     public class FetchTweetsTests
     {
-        [Test]
+        [Test, Ignore]
         public void FetchTweetsTest()
         {
             var tweets = GetSwetuggTweets();
@@ -25,7 +25,7 @@ namespace Tests.Integration
             return tweets;
         }
 
-        [Test]
+        [Test, Ignore]
         public void GetLocationsFromTweets()
         {
             var finder = new TweetFinder();
