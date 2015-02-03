@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Geocoding;
 using Tweetinvi;
@@ -68,14 +69,21 @@ namespace Aptitud.SwetuggMob.Web.Services
                 .Select(tweet => tweet.Creator.Location).ToList().Distinct();
         }
 
-        public Geocoding.Google.GoogleAddress GetGeocode(string address)
+        public GoogleAddress GetGeocode(string address)
         {
             if (String.IsNullOrEmpty(address))
                 return null;
 
             var geoCoder = new Geocoding.Google.GoogleGeocoder();
 
-            return geoCoder.Geocode(address).FirstOrDefault();
+            try
+            {
+                return geoCoder.Geocode(address).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 
